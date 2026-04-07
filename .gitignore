@@ -397,5 +397,9 @@ FodyWeavers.xsd
 *.msm
 *.msp
 
+# Ensure the lib folder and its contents are tracked
+!lib/
+!lib/**
+
 # JetBrains Rider
 *.sln.iml
