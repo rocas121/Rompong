@@ -1,6 +1,9 @@
 #include <iostream>
 #include <SDL3/SDL.h>
 #include <string>
+#include <cmath>
+#include <algorithm>
+
 
 class Game {
 private:
@@ -14,6 +17,8 @@ private:
 
 	SDL_Rect backgroundRect_; 
 
+	float hue_ = 0.0f;
+
 public:
 	//Base
 	Game();
@@ -25,7 +30,7 @@ public:
 	
 	//Logics
 	void restoreOriginalSize();
-
+	void rainbow();
 
 	//Get
 	int getScreenWidth();
