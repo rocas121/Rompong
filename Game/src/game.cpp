@@ -28,53 +28,64 @@ int Game::run() {
 		else
 		{
 			bool quit{ false };
-
-			SDL_Event e;
-			SDL_zero(e);
-
-
+			Timer capTimer;
+			//Time spent rendering
+			Uint64 renderingNS{ 0 };
+			
 			//main loop
 			while (quit == false)
 			{
+				capTimer.start();
+
 				//Event Handling
-				while (SDL_PollEvent(&e) == true)
-				{
-					EventHandler(e, quit);
-				}
+				EventHandler(quit);
 				//Ur logic here
+				displayFps(renderingNS);
 				rainbow();
 
 				//Rendering section
 				SDL_FillSurfaceRect(screenSurface_, nullptr, SDL_MapSurfaceRGB(screenSurface_, 0xFF, 0xFF, 0xFF));
 				SDL_BlitSurfaceScaled(helloWorld_, nullptr, screenSurface_, &backgroundRect_, SDL_SCALEMODE_LINEAR);
 				SDL_UpdateWindowSurface(window_);
+
+				frameRate(renderingNS, capTimer);
 			}
 		}
-
 		close();
 		return exitCode;
 	}
 }
 
-#pragma region logics
-void Game::EventHandler(SDL_Event event, bool& quit)
-{
-	if (event.type == SDL_EVENT_QUIT)
-	{
-		quit = true;
-	}
-	else if (event.type == SDL_EVENT_WINDOW_RESIZED)
-	{
-		backgroundRect_.w = event.window.data1;
-		backgroundRect_.h = event.window.data2;
 
-		screenSurface_ = SDL_GetWindowSurface(window_);
-	}
-	else if (event.type == SDL_EVENT_WINDOW_RESTORED)
+
+void Game::EventHandler(bool& quit)
+{
+
+	SDL_Event e;
+	SDL_zero(e);
+
+	while (SDL_PollEvent(&e))
 	{
-		restoreOriginalSize();
+		switch (e.type)
+		{
+			case SDL_EVENT_QUIT:
+				quit = true;
+				break;
+
+			case SDL_EVENT_WINDOW_RESIZED:
+				backgroundRect_.w = e.window.data1;
+				backgroundRect_.h = e.window.data2;
+				screenSurface_ = SDL_GetWindowSurface(window_);
+				break;
+			case SDL_EVENT_WINDOW_RESTORED:
+				restoreOriginalSize();
+				break;
+
+		}
 	}
+
 }
+#pragma region logics
 void Game::restoreOriginalSize()
 {
 	int originalW = helloWorld_->w;
@@ -89,6 +100,7 @@ void Game::restoreOriginalSize()
 	SDL_Log("Window restored to original BMP size : %dx%d", originalW, originalH);
 }
 
+//da rainbow function
 void Game::rainbow()
 {
 	//Hue is reversed btw
@@ -113,6 +125,37 @@ void Game::rainbow()
 
 	SDL_SetSurfaceColorMod(helloWorld_, (Uint8)((r + m) * 255), (Uint8)((g + m) * 255), (Uint8)((b + m) * 255));
 }
+
+void Game::frameRate(Uint64& renderingNS, Timer& capTimer)
+{
+	//get time to render frame
+	renderingNS = capTimer.getTicksNS();
+
+	//If time remaining in frame
+	constexpr Uint64 nsPerFrame = 1000000000 / screenFps_;
+
+	if (renderingNS < nsPerFrame)
+	{
+		//sleep
+		Uint64 sleepTime = nsPerFrame - renderingNS;
+		SDL_DelayNS(nsPerFrame - renderingNS);
+
+		//get frame time including sleeptime
+		renderingNS = capTimer.getTicksNS();
+	}
+
+}
+
+void Game::displayFps(Uint64 renderingNS)
+{
+	if (renderingNS != 0)
+	{
+		double framesPerSecond{ 1000000000.0 / static_cast<double>(renderingNS) };
+
+		std::cout << "FPS: " << framesPerSecond << "  \r" << std::flush;
+	}
+}
+
 #pragma endregion
 
 #pragma region Steps

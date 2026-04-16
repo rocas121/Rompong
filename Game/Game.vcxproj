@@ -22,8 +22,10 @@
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="Include\game.h" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\timer.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
