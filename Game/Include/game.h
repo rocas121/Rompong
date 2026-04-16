@@ -15,10 +15,10 @@ class Game
 		SDL_Window* window_{ nullptr };
 		SDL_Surface* screenSurface_{ nullptr };
 
+		//Hoshino surface
 		SDL_Surface* helloWorld_{ nullptr };
 
 		SDL_Rect backgroundRect_; 
-
 		float hue_ = 0.0f;
 
 	public:

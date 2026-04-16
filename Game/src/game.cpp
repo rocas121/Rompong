@@ -7,6 +7,7 @@ Game::Game()
 	backgroundRect_.y = 0;
 	backgroundRect_.w = screenWidth_;
 	backgroundRect_.h = screenHeight_;
+	run();
 }
 
 //MAIN LOOP
