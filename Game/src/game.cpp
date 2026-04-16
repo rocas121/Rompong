@@ -39,6 +39,7 @@ int Game::run() {
 
 				//Event Handling
 				EventHandler(quit);
+
 				//Ur logic here
 				displayFps(renderingNS);
 				rainbow();
@@ -96,7 +97,7 @@ void Game::restoreOriginalSize()
 	backgroundRect_.w = originalW;
 	backgroundRect_.h = originalH;
 	screenSurface_ = SDL_GetWindowSurface(window_);
-
+	system("cls");
 	SDL_Log("Window restored to original BMP size : %dx%d", originalW, originalH);
 }
 
