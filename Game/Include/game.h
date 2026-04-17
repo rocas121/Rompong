@@ -3,8 +3,9 @@
 #include <string>
 #include <cmath>
 #include <algorithm>
-#include "timer.h"
 
+#include "timer.h"
+#include "hoshino.h"
 class Game 
 {
 	private:
@@ -32,7 +33,6 @@ class Game
 	
 		//Logics
 		void restoreOriginalSize();
-		void rainbow();
 
 		//Get
 		int getScreenWidth();

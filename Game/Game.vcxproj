@@ -21,10 +21,12 @@
   <ItemGroup>
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="Include\game.h" />
+    <ClCompile Include="src\hoshino.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\hoshino.h" />
     <ClInclude Include="Include\timer.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>

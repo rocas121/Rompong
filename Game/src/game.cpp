@@ -43,7 +43,7 @@ int Game::run() {
 
 				//Ur logic here
 				displayFps(renderingNS);
-				rainbow();
+				rainbow(hue_, helloWorld_);
 
 				//Rendering section
 				SDL_FillSurfaceRect(screenSurface_, nullptr, SDL_MapSurfaceRGB(screenSurface_, 0xFF, 0xFF, 0xFF));
@@ -103,30 +103,6 @@ void Game::restoreOriginalSize()
 }
 
 //da rainbow function
-void Game::rainbow()
-{
-	//Hue is reversed btw
-	float speed = 15.0f;
-	hue_ -= speed * 0.016f; //somewhere at 60 fps
-	if (hue_ <= 0.0f)hue_ += 360.0f; //set to 0
-
-
-	float s = 1.0f; // Saturation 
-	float v = 1.0f; // Value
-	float c = v * s;
-	float x = c * (1 - std::abs(std::fmod(hue_ / 60.0f, 2) - 1));
-	float m = v - c;
-	float r, g, b;
-
-	if (hue_ < 60) { r = c; g = x; b = 0; }
-	else if (hue_ < 120) { r = x; g = c; b = 0; }
-	else if (hue_ < 180) { r = 0; g = c; b = x; }
-	else if (hue_ < 240) { r = 0; g = x; b = c; }
-	else if (hue_ < 300) { r = x; g = 0; b = c; }
-	else { r = c; g = 0; b = x; }
-
-	SDL_SetSurfaceColorMod(helloWorld_, (Uint8)((r + m) * 255), (Uint8)((g + m) * 255), (Uint8)((b + m) * 255));
-}
 
 void Game::frameRate(Uint64& renderingNS, Timer& capTimer)
 {
