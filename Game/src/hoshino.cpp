@@ -2,10 +2,12 @@
 
 //What makes Hoshino.
 
-void rainbow(float& hue, SDL_Surface* surface)
+void rainbow(SDL_Surface* surface)
 {
 	//Hue is reversed btw
+	static float hue = 0.0f;
 	float speed = 15.0f;
+
 	hue -= speed * 0.016f; //somewhere at 60 fps
 	if (hue <= 0.0f)hue += 360.0f; //set to 0
 

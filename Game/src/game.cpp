@@ -42,7 +42,7 @@ int Game::run() {
 				//Ur logic here
 				capTimer.displayFps();
 
-				rainbow(hue_, surfaceHoshino);
+				rainbow(surfaceHoshino);
 
 				//Rendering section
 				SDL_FillSurfaceRect(screenSurface, nullptr, SDL_MapSurfaceRGB(screenSurface, 0xFF, 0xFF, 0xFF));
