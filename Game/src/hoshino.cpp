@@ -1,6 +1,6 @@
 #include "hoshino.h"
 
-
+//What makes Hoshino.
 
 void rainbow(float& hue, SDL_Surface* surface)
 {
@@ -13,6 +13,7 @@ void rainbow(float& hue, SDL_Surface* surface)
 	float s = 1.0f; // Saturation 
 	float v = 1.0f; // Value
 	float c = v * s;
+
 	float x = c * (1 - std::abs(std::fmod(hue / 60.0f, 2) - 1));
 	float m = v - c;
 	float r, g, b;
@@ -27,3 +28,16 @@ void rainbow(float& hue, SDL_Surface* surface)
 	SDL_SetSurfaceColorMod(surface, (Uint8)((r + m) * 255), (Uint8)((g + m) * 255), (Uint8)((b + m) * 255));
 }
 
+void restoreOriginalSize()
+{
+	int originalW = surfaceHoshino->w;
+	int originalH = surfaceHoshino->h;
+
+	SDL_SetWindowSize(window, originalW, originalH);
+
+	backgroundRect.w = originalW;
+	backgroundRect.h = originalH;
+	screenSurface = SDL_GetWindowSurface(window);
+	system("cls");
+	SDL_Log("Window restored to original BMP size : %dx%d", originalW, originalH);
+}
