@@ -38,6 +38,4 @@ void restoreOriginalSize()
 	backgroundRect.w = originalW;
 	backgroundRect.h = originalH;
 	screenSurface = SDL_GetWindowSurface(window);
-	system("cls");
-	SDL_Log("Window restored to original BMP size : %dx%d", originalW, originalH);
 }

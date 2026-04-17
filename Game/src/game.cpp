@@ -80,6 +80,9 @@ void Game::EventHandler(bool& quit)
 			case SDL_EVENT_WINDOW_RESTORED:
 				restoreOriginalSize();
 				break;
+			case SDL_EVENT_WINDOW_MINIMIZED:
+				restoreOriginalSize();
+				break;
 
 			case SDL_EVENT_KEY_DOWN:
 				switch (e.key.key)
