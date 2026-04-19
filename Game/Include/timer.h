@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL3/SDL_timer.h>
 
-//Containst timer for FPS
+//Contains timer for FPS
 class Timer
 {
 	private:
