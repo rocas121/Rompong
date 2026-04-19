@@ -13,7 +13,7 @@ bool init()
 	}
 	else
 	{
-		if (window = SDL_CreateWindow("Hoshino", screenWidth, screenHeight, SDL_WINDOW_RESIZABLE); window == nullptr)
+		if (SDL_CreateWindowAndRenderer("Hoshino", screenWidth, screenHeight, SDL_WINDOW_RESIZABLE, &window, &renderer) == false)
 		{
 			SDL_Log("Window could not be created,  SDL error : %s\n", SDL_GetError());
 			success = false;
@@ -37,21 +37,6 @@ bool loadMedia()
 		SDL_Log("Unable to load image %s,  SDL error : %s\n", imagePath.c_str(), SDL_GetError());
 		success = false;
 	}
-	else
-	{
-		int imgW = surfaceHoshino->w;
-		int imgH = surfaceHoshino->h;
-
-		SDL_SetWindowSize(window, imgW, imgH);
-
-		backgroundRect.w = imgW;
-		backgroundRect.h = imgH;
-
-		SDL_SetWindowIcon(window, surfaceHoshino);
-
-		screenSurface = SDL_GetWindowSurface(window);
-
-	}
 	return success;
 }
 
@@ -60,9 +45,13 @@ void close()
 	SDL_DestroySurface(surfaceHoshino);
 	surfaceHoshino = nullptr;
 
+	SDL_DestroyRenderer(renderer);
+	renderer = nullptr;
+
 	SDL_DestroyWindow(window);
 	window = nullptr;
 	screenSurface = nullptr;
+	
 
 	SDL_Quit();
 }

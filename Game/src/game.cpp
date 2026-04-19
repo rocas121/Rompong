@@ -30,7 +30,7 @@ int Game::run() {
 		{
 			bool quit{ false };
 			Timer capTimer;
-
+	
 			//main loop
 			while (quit == false)
 			{
@@ -42,12 +42,25 @@ int Game::run() {
 				//Ur logic here
 				capTimer.displayFps();
 
-				rainbow(surfaceHoshino);
+
+				paddle.move();
+				//rainbow(surfaceHoshino);
+
+				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				SDL_RenderClear(renderer);
+
+
+				SDL_FRect PaddleRect;
+				paddle.render(PaddleRect);
+				SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
+				SDL_RenderFillRect(renderer, &PaddleRect);
+
+				SDL_RenderPresent(renderer);
 
 				//Rendering section
-				SDL_FillSurfaceRect(screenSurface, nullptr, SDL_MapSurfaceRGB(screenSurface, 0xFF, 0xFF, 0xFF));
-				SDL_BlitSurfaceScaled(surfaceHoshino, nullptr, screenSurface, &backgroundRect, SDL_SCALEMODE_LINEAR);
-				SDL_UpdateWindowSurface(window);
+				//SDL_FillSurfaceRect(screenSurface, nullptr, SDL_MapSurfaceRGB(screenSurface, 0xFF, 0xFF, 0xFF));
+				//SDL_BlitSurfaceScaled(surfaceHoshino, nullptr, screenSurface, &backgroundRect, SDL_SCALEMODE_LINEAR);
+				//SDL_UpdateWindowSurface(window);
 
 
 				capTimer.frameRate();
@@ -72,20 +85,22 @@ void Game::EventHandler(bool& quit)
 				quit = true;
 				break;
 
-			case SDL_EVENT_WINDOW_RESIZED:
-				backgroundRect.w = e.window.data1;
-				backgroundRect.h = e.window.data2;
-				screenSurface = SDL_GetWindowSurface(window);
-				break;
-			case SDL_EVENT_WINDOW_RESTORED:
-				restoreOriginalSize();
-				break;
+			//case SDL_EVENT_WINDOW_RESIZED:
+			//	backgroundRect.w = e.window.data1;
+			//	backgroundRect.h = e.window.data2;
+			//	screenSurface = SDL_GetWindowSurface(window);
+			//	break;
+			//case SDL_EVENT_WINDOW_RESTORED:
+			//	//restoreOriginalSize();
+			//	break;
 			case SDL_EVENT_KEY_DOWN:
 				switch (e.key.key)
 					case SDLK_ESCAPE:
 						quit = true;
 						break;
 		}
+
+		paddle.handleEvent(e);
 	}
 
 }

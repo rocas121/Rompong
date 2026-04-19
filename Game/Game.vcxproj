@@ -19,18 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ball.cpp" />
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="Include\game.h" />
     <ClCompile Include="src\Globals.cpp" />
     <ClCompile Include="src\hoshino.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\paddle.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
     <ClCompile Include="src\timer.cpp" />
     <ClCompile Include="src\Util.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Include\ball.h" />
     <ClInclude Include="Include\Const.h" />
     <ClInclude Include="Include\Globals.h" />
     <ClInclude Include="Include\hoshino.h" />
+    <ClInclude Include="Include\paddle.h" />
+    <ClInclude Include="Include\Texture.h" />
     <ClInclude Include="Include\timer.h" />
     <ClInclude Include="Include\Util.h" />
     <ClInclude Include="resource.h" />
