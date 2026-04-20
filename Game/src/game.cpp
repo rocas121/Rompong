@@ -30,7 +30,10 @@ int Game::run() {
 		{
 			bool quit{ false };
 			Timer capTimer;
-	
+			
+			//temp hoshino
+			//SDL_Rect tempRect = { 0, 0, screenWidth, screenHeight };
+
 			//main loop
 			while (quit == false)
 			{
@@ -46,21 +49,21 @@ int Game::run() {
 				paddle.move();
 				//rainbow(surfaceHoshino);
 
-				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+
+				////background
+				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 				SDL_RenderClear(renderer);
+
+				//Rendering surface for hoshino, UpdateWindowSurface and RenderPresents overwrite each others, must convert surface into texture then remove surface
+				//SDL_FillSurfaceRect(screenSurface, nullptr, SDL_MapSurfaceRGB(screenSurface, 0xFF, 0xFF, 0xFF));
+				//SDL_BlitSurfaceScaled(surfaceHoshino, nullptr, screenSurface, &tempRect, SDL_SCALEMODE_LINEAR);
+				//SDL_UpdateWindowSurface(window);
 
 
 				SDL_FRect PaddleRect;
-				paddle.render(PaddleRect);
-				SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0xFF, 0xFF);
-				SDL_RenderFillRect(renderer, &PaddleRect);
-
+				paddle.render();
 				SDL_RenderPresent(renderer);
 
-				//Rendering section
-				//SDL_FillSurfaceRect(screenSurface, nullptr, SDL_MapSurfaceRGB(screenSurface, 0xFF, 0xFF, 0xFF));
-				//SDL_BlitSurfaceScaled(surfaceHoshino, nullptr, screenSurface, &backgroundRect, SDL_SCALEMODE_LINEAR);
-				//SDL_UpdateWindowSurface(window);
 
 
 				capTimer.frameRate();

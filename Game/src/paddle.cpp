@@ -2,8 +2,8 @@
 
 
 Paddle::Paddle() :
-	mPosX{ 0 },
-	mPosY{ 0 },
+	mPosX{ screenWidth/2 - paddleWidth/2 },
+	mPosY{ screenHeight / 2 - paddleHeight / 2 },
 	mVelX{ 0 },
 	mVelY{ 0 }
 {
@@ -65,10 +65,12 @@ void Paddle::move()
 	}
 }
 
-void Paddle::render(SDL_FRect& paddle)
+void Paddle::render()
 {
-	paddle.x = static_cast<float>(mPosX);
-	paddle.y = static_cast<float>(mPosY);
-	paddle.w = static_cast<float>(paddleWidth);
-	paddle.h = static_cast<float>(paddleHeight);
+	paddleRect.x = mPosX;
+	paddleRect.y = mPosY;
+	paddleRect.w = paddleWidth;
+	paddleRect.h = paddleHeight;
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_RenderFillRect(renderer, &paddleRect);
 }

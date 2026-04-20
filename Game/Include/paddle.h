@@ -1,7 +1,6 @@
 #pragma once
-#include <SDL3/SDL.h>
 #include "Const.h"
-
+#include "Globals.h"
 class Paddle
 {
 private:
@@ -13,6 +12,8 @@ private:
 	int mPosX, mPosY;
 	int mVelX, mVelY;
 
+	SDL_FRect paddleRect;
+
 public:
 
 	Paddle();
@@ -21,6 +22,6 @@ public:
 
 	void move();
 
-	void render(SDL_FRect& paddle);
+	void render();
 
 };

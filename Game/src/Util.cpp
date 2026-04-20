@@ -13,12 +13,13 @@ bool init()
 	}
 	else
 	{
+
 		if (SDL_CreateWindowAndRenderer("Hoshino", screenWidth, screenHeight, SDL_WINDOW_RESIZABLE, &window, &renderer) == false)
 		{
 			SDL_Log("Window could not be created,  SDL error : %s\n", SDL_GetError());
 			success = false;
 		}
-		else
+		else 
 		{
 			screenSurface = SDL_GetWindowSurface(window);
 		}
@@ -30,8 +31,6 @@ bool loadMedia()
 {
 	bool success{ true };
 	std::string imagePath{ "Assets/HoshinoPlush.bmp" };
-
-
 	if (surfaceHoshino = SDL_LoadBMP(imagePath.c_str()); surfaceHoshino == nullptr)
 	{
 		SDL_Log("Unable to load image %s,  SDL error : %s\n", imagePath.c_str(), SDL_GetError());
@@ -47,9 +46,9 @@ void close()
 
 	SDL_DestroyRenderer(renderer);
 	renderer = nullptr;
-
 	SDL_DestroyWindow(window);
 	window = nullptr;
+
 	screenSurface = nullptr;
 	
 
