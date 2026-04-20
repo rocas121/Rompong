@@ -71,6 +71,7 @@ void Paddle::render()
 	paddleRect.y = mPosY;
 	paddleRect.w = paddleWidth;
 	paddleRect.h = paddleHeight;
-	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //is red
+	//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //is white
 	SDL_RenderFillRect(renderer, &paddleRect);
 }
