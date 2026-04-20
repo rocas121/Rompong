@@ -4,9 +4,6 @@
 #include "Const.h"
 #include "Util.h"
 #include "Globals.h"
-#include "hoshino.h"
-
-
 #include "paddle.h"
 class Game 
 {

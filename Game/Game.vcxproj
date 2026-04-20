@@ -23,7 +23,6 @@
     <ClCompile Include="src\game.cpp" />
     <ClCompile Include="Include\game.h" />
     <ClCompile Include="src\Globals.cpp" />
-    <ClCompile Include="src\hoshino.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\paddle.cpp" />
     <ClCompile Include="src\Texture.cpp" />
@@ -34,7 +33,6 @@
     <ClInclude Include="Include\ball.h" />
     <ClInclude Include="Include\Const.h" />
     <ClInclude Include="Include\Globals.h" />
-    <ClInclude Include="Include\hoshino.h" />
     <ClInclude Include="Include\paddle.h" />
     <ClInclude Include="Include\Texture.h" />
     <ClInclude Include="Include\timer.h" />
@@ -100,12 +98,12 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)\Dependencies\SDL3\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\Dependencies\SDL3\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\Dependencies\;$(ProjectDir)\Dependencies\SDL3\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Dependencies\SDL3_image\lib\x64;$(ProjectDir)\Dependencies\SDL3\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)\Dependencies\SDL3\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\Dependencies\SDL3\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\Dependencies\;$(ProjectDir)\Dependencies\SDL3\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\Dependencies\SDL3_image\lib\x64;$(ProjectDir)\Dependencies\SDL3\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -145,8 +143,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\SDL3_image\lib\x64;$(ProjectDir)\Dependencies\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent>
       <Command>
@@ -168,8 +166,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL3.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(ProjectDir)\Dependencies\SDL3_image\lib\x64;$(ProjectDir)\Dependencies\SDL3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL3.lib;SDL3_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>

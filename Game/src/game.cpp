@@ -34,6 +34,11 @@ int Game::run() {
 			//temp hoshino
 			//SDL_Rect tempRect = { 0, 0, screenWidth, screenHeight };
 
+			//sets texture to current image
+			pngTexture.setWidth(screenWidth);
+			pngTexture.setHeight(screenHeight);
+
+
 			//main loop
 			while (quit == false)
 			{
@@ -59,6 +64,7 @@ int Game::run() {
 				//SDL_BlitSurfaceScaled(surfaceHoshino, nullptr, screenSurface, &tempRect, SDL_SCALEMODE_LINEAR);
 				//SDL_UpdateWindowSurface(window);
 
+				pngTexture.render(0.f, 0.f);
 
 				SDL_FRect PaddleRect;
 				paddle.render();
