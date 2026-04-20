@@ -52,17 +52,12 @@ int Game::run() {
 
 
 				paddle.move();
-				//rainbow(surfaceHoshino);
-
 
 				////background
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 				SDL_RenderClear(renderer);
 
 				//Rendering surface for hoshino, UpdateWindowSurface and RenderPresents overwrite each others, must convert surface into texture then remove surface
-				//SDL_FillSurfaceRect(screenSurface, nullptr, SDL_MapSurfaceRGB(screenSurface, 0xFF, 0xFF, 0xFF));
-				//SDL_BlitSurfaceScaled(surfaceHoshino, nullptr, screenSurface, &tempRect, SDL_SCALEMODE_LINEAR);
-				//SDL_UpdateWindowSurface(window);
 
 				pngTexture.render(0.f, 0.f);
 
@@ -94,14 +89,6 @@ void Game::EventHandler(bool& quit)
 				quit = true;
 				break;
 
-			//case SDL_EVENT_WINDOW_RESIZED:
-			//	backgroundRect.w = e.window.data1;
-			//	backgroundRect.h = e.window.data2;
-			//	screenSurface = SDL_GetWindowSurface(window);
-			//	break;
-			//case SDL_EVENT_WINDOW_RESTORED:
-			//	//restoreOriginalSize();
-			//	break;
 			case SDL_EVENT_KEY_DOWN:
 				switch (e.key.key)
 					case SDLK_ESCAPE:
