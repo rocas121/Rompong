@@ -4,7 +4,10 @@
 #include "Const.h"
 #include "Util.h"
 #include "Globals.h"
+
 #include "paddle.h"
+#include "ball.h"
+
 class Game 
 {
 	private:

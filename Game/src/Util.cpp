@@ -34,12 +34,20 @@ bool loadMedia()
 		SDL_Log("Unable to load png image!\n");
 		success = false;
 	}
-	return success;
+
+	if (ballTexture.loadFromFile("Assets/dot.bmp") == false)
+	{
+		SDL_Log("Unable to load png image!\n");
+		success = false;
+	}
+
+	return success; //always put at end
 }
 
 void close()
 {
 	pngTexture.destroy();
+	ballTexture.destroy();
 
 	SDL_DestroyRenderer(renderer);
 	renderer = nullptr;

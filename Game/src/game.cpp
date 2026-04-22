@@ -38,6 +38,9 @@ int Game::run() {
 			pngTexture.setWidth(screenWidth);
 			pngTexture.setHeight(screenHeight);
 
+			//ball
+			Ball ball(Ball::ballWidth / 2, Ball::ballHeight / 2);
+
 
 			//main loop
 			while (quit == false)
@@ -63,9 +66,12 @@ int Game::run() {
 
 				SDL_FRect PaddleRect;
 				paddle.render();
+
+				//ball
+				ball.render();
+
+
 				SDL_RenderPresent(renderer);
-
-
 
 				capTimer.frameRate();
 			}

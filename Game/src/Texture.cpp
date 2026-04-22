@@ -30,18 +30,24 @@ bool Texture::loadFromFile(std::string path)
     }
     else
     {
-        //Create texture from surface
-        if (mTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface); mTexture == nullptr)
+        if (SDL_SetSurfaceColorKey(loadedSurface, true, SDL_MapSurfaceRGB(loadedSurface, 0x00, 0xFF, 0xFF)) == false)
         {
-            SDL_Log("Unable to create texture from loaded pixels! SDL error: %s\n", SDL_GetError());
+            SDL_Log("Unable to color key, SDL error: %s", SDL_GetError());
         }
         else
         {
-            //Get image dimensions
-            mWidth = loadedSurface->w;
-            mHeight = loadedSurface->h;
+            //Create texture from surface
+            if (mTexture = SDL_CreateTextureFromSurface(renderer, loadedSurface); mTexture == nullptr)
+            {
+                SDL_Log("Unable to create texture from loaded pixels! SDL error: %s\n", SDL_GetError());
+            }
+            else
+            {
+                //Get image dimensions
+                mWidth = loadedSurface->w;
+                mHeight = loadedSurface->h;
+            }
         }
-
         //Clean up loaded surface
         SDL_DestroySurface(loadedSurface);
     }
