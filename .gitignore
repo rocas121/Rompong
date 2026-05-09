@@ -404,3 +404,4 @@ FodyWeavers.xsd
 !Dependencies/SDL3/lib/**
 # JetBrains Rider
 *.sln.iml
+!Dependencies/SDL3_image/
