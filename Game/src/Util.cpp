@@ -35,7 +35,7 @@ bool loadMedia()
 		success = false;
 	}
 
-	if (ballTexture.loadFromFile("Assets/dot.bmp") == false)
+	if (ballTexture.loadFromFile("Assets/ball.bmp") == false)
 	{
 		SDL_Log("Unable to load png image!\n");
 		success = false;

@@ -8,34 +8,58 @@ Ball::Ball(int x, int y)
 
 	mCollider.r = ballWidth / 2;
 
-	mVelX = 0;
-	mVelY = 0;
+	mVelX = 10;
+	mVelY = 5;
 
 	shiftColliders();
 }
 
-void Ball::move(SDL_Rect& square, Ball& ball)
+//void Ball::move(SDL_Rect& square, Ball& ball)
+//{
+//	mPosX += mVelX;
+//	shiftColliders();
+//
+//	if ( (mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth) || checkCollision(mCollider, square) )
+//	{
+//		mPosX -= mVelX;
+//		shiftColliders();
+//	}
+//
+//	mPosY += mVelY;
+//	shiftColliders();
+//
+//	//If the dot collided or went too far up or down
+//	if ((mPosY - mCollider.r < 0) || (mPosY + mCollider.r > screenHeight) || checkCollision(mCollider, square))
+//	{
+//		//Move back
+//		mPosY -= mVelY;
+//		shiftColliders();
+//	}
+//
+//}
+
+void Ball::move()
 {
 	mPosX += mVelX;
-	shiftColliders();
-
-	if ( (mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth) || checkCollision(mCollider, square) )
+    shiftColliders();
+	if ( (mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth) )
 	{
-		mPosX -= mVelX;
+		mVelX = -mVelX;  
+		mPosX += mVelX;
 		shiftColliders();
 	}
 
 	mPosY += mVelY;
 	shiftColliders();
 
-	//If the dot collided or went too far up or down
-	if ((mPosY - mCollider.r < 0) || (mPosY + mCollider.r > screenHeight) || checkCollision(mCollider, square))
+	
+	if ((mPosY - mCollider.r < 0) || (mPosY + mCollider.r > screenHeight))
 	{
 		//Move back
-		mPosY -= mVelY;
+		mVelY = -mVelY;  
+		mPosY += mVelY;
 		shiftColliders();
 	}
-
 }
 
 void Ball::render()
@@ -85,7 +109,7 @@ bool Ball ::checkCollision(Circle& a, SDL_Rect& b)
 	}
 	return false;
 }
-
+	
 double Ball::distanceSquared(int x1, int y1, int x2, int y2)
 {
 	int deltaX = x2 - x1;

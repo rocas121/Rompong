@@ -1,12 +1,13 @@
 #include "paddle.h"
 
 
-Paddle::Paddle() :
-	mPosX{ screenWidth/2 - paddleWidth/2 },
+Paddle::Paddle(bool isPlayer):
+	mPosX{ (isPlayer) ? (padding) : (screenWidth - paddleWidth - padding) },
 	mPosY{ screenHeight / 2 - paddleHeight / 2 },
 	mVelX{ 0 },
 	mVelY{ 0 }
 {
+	SDL_Log("Paddle created at X: %d, Y: %d", mPosX, mPosY);
 }
 
 void Paddle::handleEvent(SDL_Event& e)
@@ -21,30 +22,30 @@ void Paddle::handleEvent(SDL_Event& e)
 			case SDLK_DOWN:
 				mVelY += paddleVel;
 				break;
-			case SDLK_LEFT:
+/*			case SDLK_LEFT:
 				mVelX -= paddleVel;
 				break;
 			case SDLK_RIGHT:
 				mVelX += paddleVel;
-				break;					
+				break;			*/		
 		}
 	}
 	else if (e.type == SDL_EVENT_KEY_UP && e.key.repeat == 0)
 	{
 		switch (e.key.key)
 		{
-		case SDLK_UP:
-			mVelY += paddleVel;
-			break;
-		case SDLK_DOWN:
-			mVelY -= paddleVel;
-			break;
-		case SDLK_LEFT:
-			mVelX += paddleVel;
-			break;
-		case SDLK_RIGHT:
-			mVelX -= paddleVel;
-			break;
+			case SDLK_UP:
+				mVelY += paddleVel;
+				break;
+			case SDLK_DOWN:
+				mVelY -= paddleVel;
+				break;
+			//case SDLK_LEFT:
+			//	mVelX += paddleVel;
+			//	break;
+			//case SDLK_RIGHT:
+			//	mVelX -= paddleVel;
+			//	break;
 		}
 	}
 }
@@ -71,7 +72,6 @@ void Paddle::render()
 	paddleRect.y = mPosY;
 	paddleRect.w = paddleWidth;
 	paddleRect.h = paddleHeight;
-	SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255); //is red
-	//SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //is white
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //is white
 	SDL_RenderFillRect(renderer, &paddleRect);
 }

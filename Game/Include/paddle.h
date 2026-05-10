@@ -5,8 +5,8 @@ class Paddle
 {
 private:
 	static constexpr int paddleWidth = 20;
-	static constexpr int paddleHeight = 20;
-
+	static constexpr int paddleHeight = 80;
+	static constexpr int padding = 20;
 	static constexpr int paddleVel = 10;
 
 	int mPosX, mPosY;
@@ -16,7 +16,7 @@ private:
 
 public:
 
-	Paddle();
+	Paddle(bool isPlayer);
 
 	void handleEvent(SDL_Event& e);
 

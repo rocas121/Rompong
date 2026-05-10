@@ -1,7 +1,9 @@
 #include "game.h"
 
 
-Game::Game()
+Game::Game() : 
+paddle(true),
+npcPaddle(false)
 {
 	backgroundRect.x = 0;
 	backgroundRect.y = 0;
@@ -35,11 +37,11 @@ int Game::run() {
 			//SDL_Rect tempRect = { 0, 0, screenWidth, screenHeight };
 
 			//sets texture to current image
-			pngTexture.setWidth(screenWidth);
-			pngTexture.setHeight(screenHeight);
+			//pngTexture.setWidth(screenWidth);
+			//pngTexture.setHeight(screenHeight);
 
 			//ball
-			Ball ball(Ball::ballWidth / 2, Ball::ballHeight / 2);
+			Ball ball(screenWidth / 2 - Ball::ballWidth / 2, screenHeight / 2 - Ball::ballHeight / 2);
 
 
 			//main loop
@@ -55,6 +57,8 @@ int Game::run() {
 
 
 				paddle.move();
+				npcPaddle.move();
+				ball.move();
 
 				////background
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
@@ -62,14 +66,14 @@ int Game::run() {
 
 				//Rendering surface for hoshino, UpdateWindowSurface and RenderPresents overwrite each others, must convert surface into texture then remove surface
 
-				pngTexture.render(0.f, 0.f);
+				//pngTexture.render(0.f, 0.f);
 
 				SDL_FRect PaddleRect;
 				paddle.render();
+				npcPaddle.render();
 
 				//ball
 				ball.render();
-
 
 				SDL_RenderPresent(renderer);
 
@@ -103,6 +107,7 @@ void Game::EventHandler(bool& quit)
 		}
 
 		paddle.handleEvent(e);
+		npcPaddle.handleEvent(e);
 	}
 
 }

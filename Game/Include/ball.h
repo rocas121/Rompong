@@ -28,7 +28,9 @@ class Ball
 
 		Ball( int x , int y);
 
-		void move(SDL_Rect& square, Ball& ball);
+		//void move(SDL_Rect& square, Ball& ball);
+		void move();
+
 		void render();
 
 		Circle& getCollider();

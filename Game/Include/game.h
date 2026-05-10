@@ -12,6 +12,7 @@ class Game
 {
 	private:
 		Paddle paddle;
+		Paddle npcPaddle;
 	public:
 		Game();
 		int run();
