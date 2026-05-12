@@ -10,43 +10,89 @@ Paddle::Paddle(bool isPlayer):
 	SDL_Log("Paddle created at X: %d, Y: %d", mPosX, mPosY);
 }
 
-void Paddle::handleEvent(SDL_Event& e)
+void Paddle::handleEvent(SDL_Event& e, bool isPlayer)
 {
 	if (e.type == SDL_EVENT_KEY_DOWN && e.key.repeat == 0)
 	{
-		switch (e.key.key)
+
+		if (isPlayer)
 		{
-			case SDLK_UP: 
-				mVelY -= paddleVel;
-				break;
-			case SDLK_DOWN:
-				mVelY += paddleVel;
-				break;
-/*			case SDLK_LEFT:
-				mVelX -= paddleVel;
-				break;
-			case SDLK_RIGHT:
-				mVelX += paddleVel;
-				break;			*/		
+			switch (e.key.key)
+			{
+				case SDLK_W:
+					mVelY -= paddleVel;
+					break;
+				case SDLK_S:
+					mVelY += paddleVel;
+					break;
+					/*			case SDLK_LEFT:
+									mVelX -= paddleVel;
+									break;
+								case SDLK_RIGHT:
+									mVelX += paddleVel;
+								break;			*/
+			}
 		}
+		else
+		{
+			switch (e.key.key)
+			{
+				case SDLK_UP:
+					mVelY -= paddleVel;
+					break;
+				case SDLK_DOWN:
+					mVelY += paddleVel;
+					break;
+					/*			case SDLK_LEFT:
+									mVelX -= paddleVel;
+									break;
+								case SDLK_RIGHT:
+									mVelX += paddleVel;
+									break;			*/
+			}
+		}
+
+
 	}
 	else if (e.type == SDL_EVENT_KEY_UP && e.key.repeat == 0)
 	{
-		switch (e.key.key)
+		if (isPlayer)
 		{
+			switch (e.key.key)
+			{
+			case SDLK_W:
+				mVelY += paddleVel;
+				break;
+			case SDLK_S:
+				mVelY -= paddleVel;
+				break;
+				//case SDLK_LEFT:
+				//	mVelX += paddleVel;
+				//	break;
+				//case SDLK_RIGHT:
+				//	mVelX -= paddleVel;
+				//	break;
+			}
+		}
+		else
+		{
+			switch (e.key.key)
+			{
 			case SDLK_UP:
 				mVelY += paddleVel;
 				break;
 			case SDLK_DOWN:
 				mVelY -= paddleVel;
 				break;
-			//case SDLK_LEFT:
-			//	mVelX += paddleVel;
-			//	break;
-			//case SDLK_RIGHT:
-			//	mVelX -= paddleVel;
-			//	break;
+				//case SDLK_LEFT:
+				//	mVelX += paddleVel;
+				//	break;
+				//case SDLK_RIGHT:
+				//	mVelX -= paddleVel;
+				//	break;
+			}
 		}
+
 	}
 }
 

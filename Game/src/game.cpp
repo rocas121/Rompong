@@ -106,8 +106,8 @@ void Game::EventHandler(bool& quit)
 						break;
 		}
 
-		paddle.handleEvent(e);
-		npcPaddle.handleEvent(e);
+		paddle.handleEvent(e, true);
+		npcPaddle.handleEvent(e, false);
 	}
 
 }

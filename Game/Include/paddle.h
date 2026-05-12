@@ -18,7 +18,7 @@ public:
 
 	Paddle(bool isPlayer);
 
-	void handleEvent(SDL_Event& e);
+	void handleEvent(SDL_Event& e, bool isPlayer);
 
 	void move();
 
