@@ -7,7 +7,7 @@ My attempt on making a Pong game using SDL3, I mainly wanted to learn how SDL3 w
 - **Ball gets faster**: Everytime the ball bounces it get 10% faster
 - **Game resets** : resets the padddles and ball positions
 
-## API
+## APIs
 
 - **SDL3 3.4.8**
 -  **SDL_image 3.0**
