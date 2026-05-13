@@ -1,4 +1,6 @@
-#pragma once
+#ifndef  PADDLE_H
+#define PADDLE_H
+
 #include "Const.h"
 #include "Globals.h"
 class Paddle
@@ -30,3 +32,5 @@ public:
 
 	int getHeight();
 };
+
+#endif

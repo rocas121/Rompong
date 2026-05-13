@@ -7,13 +7,9 @@ Ball::Ball(int x, int y)
 {
 	mPosX = x;
 	mPosY = y;
-
 	mCollider.r = ballWidth / 2;
-
-	//Init vel
 	mVelX = 0;
-	mVelY = 0; // was 5
-	
+	mVelY = 0;
 	velMultiplier = 1.0;
 	shiftColliders();
 }
@@ -24,30 +20,39 @@ void Ball::move(Paddle& paddle1, Paddle& paddle2)
 
 	mPosX += mVelX * velMultiplier; 
     shiftColliders();
+	//Only check collision with Paddles on X axis
 	if ( checkCollision(mCollider, paddle1.paddleRect) || checkCollision(mCollider, paddle2.paddleRect))
 	{
 		mVelX = -mVelX;  
 		mPosX += mVelX;
 
+		if (firstBounce)
+		{
+			do {
+				mVelY = (std::rand() % 7) - 3;
+			} while (mVelY == 0);
+			firstBounce = false;
+		}
+
 		velMultiplier += 0.1f;
 		shiftColliders();
 	}
 
-	mPosY += mVelY;
+	mPosY += mVelY * velMultiplier;
 	shiftColliders();
-
-	
-	if ((mPosY - mCollider.r < 0) || (mPosY + mCollider.r > screenHeight))
+	if ( (mPosY - mCollider.r < 0) || (mPosY + mCollider.r > screenHeight) || checkCollision(mCollider, paddle2.paddleRect) )
 	{
+
 		//Move back
-		mVelY = -mVelY;  
+		mVelY = -mVelY;
 		mPosY += mVelY;
 
 		velMultiplier += 0.1f;
 		shiftColliders();
 	}
 
-	if ((mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth))
+	//when the ball reaches the border restart game
+	if ((mPosX - mCollider.r < -50) || (mPosX + mCollider.r > screenWidth + 50))
 	{
 		mPosX = screenWidth / 2 - ballWidth / 2;
 		mPosY = screenHeight / 2 - ballHeight / 2;
@@ -57,6 +62,8 @@ void Ball::move(Paddle& paddle1, Paddle& paddle2)
 		paddle1.setPosY(screenHeight / 2 - paddle1.getHeight() / 2);
 		paddle2.setPosY(screenHeight / 2 - paddle2.getHeight() / 2);
 		isStarted = false;
+		firstBounce = true;
+
 	}
 }
 
@@ -65,12 +72,9 @@ void Ball::render()
 	ballTexture.render(mPosX - mCollider.r, mPosY - mCollider.r);
 }
 
-/// <summary>
-/// Toss coin to decide which side starts
-/// </summary>
-/// <returns></returns>
 bool Ball::start()
 {
+
 	if (isStarted)
 	{
 		return false;
@@ -80,15 +84,15 @@ bool Ball::start()
 	int coin = std::rand() % 2 + 1;
 
 	velMultiplier = 1.0f;
+	mVelY = 0;
+	firstBounce = true;
 	switch (coin)
 	{
-	//goes to left
 	case 1:
 
 		mVelX = -3;
 		break;
 
-	//goes to right
 	case 2:
 
 		mVelX = 3;
@@ -103,8 +107,6 @@ bool Ball::start()
 bool Ball ::checkCollision(Circle& a, SDL_FRect& b)
 {
 	int cX, cY;
-
-	// closest x offset
 
 	if (a.x < b.x)
 	{
@@ -121,7 +123,6 @@ bool Ball ::checkCollision(Circle& a, SDL_FRect& b)
 	}
 
 
-	// closest y offset
 	if (a.y < b.y)
 	{
 		cY = b.y;
@@ -152,7 +153,6 @@ double Ball::distanceSquared(int x1, int y1, int x2, int y2)
 
 void Ball::shiftColliders()
 {
-	//Align collider to center of dot
 	mCollider.x = mPosX;
 	mCollider.y = mPosY;
 }

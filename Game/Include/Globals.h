@@ -11,8 +11,6 @@ extern SDL_Rect backgroundRect;
 
 extern SDL_Renderer* renderer;
 
-extern Texture pngTexture;
-
 
 extern Texture ballTexture;
 

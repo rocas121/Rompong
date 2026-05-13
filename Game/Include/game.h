@@ -1,4 +1,6 @@
 #pragma once
+#ifndef GAME_H
+#define GAME_H
 
 #include "timer.h"
 #include "Const.h"
@@ -21,3 +23,5 @@ class Game
 
 
 };
+
+#endif

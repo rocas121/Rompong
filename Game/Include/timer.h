@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TIMER_H
+#define TIMER_H
 #include <SDL3/SDL_timer.h>
 
 //Contains timer for FPS
@@ -20,3 +21,5 @@ class Timer
 		void reset();
 
 };
+
+#endif

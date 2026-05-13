@@ -1,4 +1,6 @@
-#pragma once
+#ifndef BALL_H
+#define BALL_H
+
 #include "Globals.h"
 #include "paddle.h"
 
@@ -23,6 +25,7 @@ class Ball
 		void shiftColliders();
 
 		bool isStarted = false;
+		bool firstBounce = true;
 
 	public:
 		static constexpr int ballWidth = 20;
@@ -31,8 +34,6 @@ class Ball
 
 		Ball( int x , int y);
 
-		//void move(SDL_Rect& square, Ball& ball);
-		//void move();
 		void move(Paddle& paddle1, Paddle& paddle2);
 		void render();
 
@@ -44,3 +45,5 @@ class Ball
 		
 		bool start();
 };
+
+#endif

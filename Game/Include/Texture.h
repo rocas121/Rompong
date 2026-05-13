@@ -1,4 +1,6 @@
-#pragma once
+#ifndef TEXTURE_H
+#define TEXTURE_H
+
 #include <SDL3/SDL.h>
 #include <string>
 class Texture
@@ -30,3 +32,6 @@ class Texture
 		void setHeight(int h);
 		bool isLoaded();
 };
+
+
+#endif

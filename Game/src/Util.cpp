@@ -28,12 +28,6 @@ bool loadMedia()
 {
 	bool success{ true };
 
-	//Load splash image
-	if (pngTexture.loadFromFile("Assets/HoshinoPlush.bmp") == false)
-	{
-		SDL_Log("Unable to load png image!\n");
-		success = false;
-	}
 
 	if (ballTexture.loadFromFile("Assets/ball.bmp") == false)
 	{
@@ -41,12 +35,11 @@ bool loadMedia()
 		success = false;
 	}
 
-	return success; //always put at end
+	return success; 
 }
 
 void close()
 {
-	pngTexture.destroy();
 	ballTexture.destroy();
 
 	SDL_DestroyRenderer(renderer);

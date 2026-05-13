@@ -32,13 +32,6 @@ int Game::run() {
 		{
 			bool quit{ false };
 			Timer capTimer;
-			
-			//temp hoshino
-			//SDL_Rect tempRect = { 0, 0, screenWidth, screenHeight };
-
-			//sets texture to current image
-			//pngTexture.setWidth(screenWidth);
-			//pngTexture.setHeight(screenHeight);
 
 			//ball
 			Ball ball(screenWidth / 2 - Ball::ballWidth / 2, screenHeight / 2 - Ball::ballHeight / 2);
@@ -49,12 +42,13 @@ int Game::run() {
 			{
 				capTimer.start();
 
-				//Event Handling
 				EventHandler(quit);
 
-				//Ur logic here
-				capTimer.displayFps();
 
+				// Logic starts here-------------------
+
+				//Displays FPS
+				//capTimer.displayFps();
 
 				paddle.move();
 				npcPaddle.move();
@@ -65,8 +59,6 @@ int Game::run() {
 				SDL_RenderClear(renderer);
 
 				//Rendering surface for hoshino, UpdateWindowSurface and RenderPresents overwrite each others, must convert surface into texture then remove surface
-
-				//pngTexture.render(0.f, 0.f);
 
 				SDL_FRect PaddleRect;
 				paddle.render();
