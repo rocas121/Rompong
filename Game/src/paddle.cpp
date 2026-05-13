@@ -7,7 +7,6 @@ Paddle::Paddle(bool isPlayer):
 	mVelX{ 0 },
 	mVelY{ 0 }
 {
-	SDL_Log("Paddle created at X: %d, Y: %d", mPosX, mPosY);
 }
 
 void Paddle::handleEvent(SDL_Event& e, bool isPlayer)
@@ -25,12 +24,6 @@ void Paddle::handleEvent(SDL_Event& e, bool isPlayer)
 				case SDLK_S:
 					mVelY += paddleVel;
 					break;
-					/*			case SDLK_LEFT:
-									mVelX -= paddleVel;
-									break;
-								case SDLK_RIGHT:
-									mVelX += paddleVel;
-								break;			*/
 			}
 		}
 		else
@@ -43,12 +36,6 @@ void Paddle::handleEvent(SDL_Event& e, bool isPlayer)
 				case SDLK_DOWN:
 					mVelY += paddleVel;
 					break;
-					/*			case SDLK_LEFT:
-									mVelX -= paddleVel;
-									break;
-								case SDLK_RIGHT:
-									mVelX += paddleVel;
-									break;			*/
 			}
 		}
 
@@ -66,12 +53,7 @@ void Paddle::handleEvent(SDL_Event& e, bool isPlayer)
 			case SDLK_S:
 				mVelY -= paddleVel;
 				break;
-				//case SDLK_LEFT:
-				//	mVelX += paddleVel;
-				//	break;
-				//case SDLK_RIGHT:
-				//	mVelX -= paddleVel;
-				//	break;
+
 			}
 		}
 		else
@@ -84,12 +66,6 @@ void Paddle::handleEvent(SDL_Event& e, bool isPlayer)
 			case SDLK_DOWN:
 				mVelY -= paddleVel;
 				break;
-				//case SDLK_LEFT:
-				//	mVelX += paddleVel;
-				//	break;
-				//case SDLK_RIGHT:
-				//	mVelX -= paddleVel;
-				//	break;
 			}
 		}
 
@@ -120,4 +96,15 @@ void Paddle::render()
 	paddleRect.h = paddleHeight;
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); //is white
 	SDL_RenderFillRect(renderer, &paddleRect);
+}
+
+
+void Paddle::setPosY(int y)
+{
+	mPosY = y;
+}
+
+int Paddle::getHeight()
+{
+	return paddleHeight;
 }

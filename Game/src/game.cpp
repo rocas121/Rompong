@@ -58,7 +58,7 @@ int Game::run() {
 
 				paddle.move();
 				npcPaddle.move();
-				ball.move();
+				ball.move(paddle,npcPaddle);
 
 				////background
 				SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);

@@ -12,9 +12,11 @@ private:
 	int mPosX, mPosY;
 	int mVelX, mVelY;
 
-	SDL_FRect paddleRect;
+
 
 public:
+
+	SDL_FRect paddleRect;
 
 	Paddle(bool isPlayer);
 
@@ -24,4 +26,7 @@ public:
 
 	void render();
 
+	void setPosY(int y);
+
+	int getHeight();
 };

@@ -46,3 +46,8 @@ void Timer::displayFps()
 		std::cout << "FPS: " << framesPerSecond << "  \r" << std::flush;
 	}
 }
+
+void Timer::reset()
+{
+	mStartTicks_ = 0;
+}

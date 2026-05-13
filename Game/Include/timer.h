@@ -17,5 +17,6 @@ class Timer
 
 		void frameRate();
 		void displayFps();
+		void reset();
 
 };

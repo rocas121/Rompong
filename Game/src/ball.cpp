@@ -1,5 +1,7 @@
 #include "ball.h"
 #include "Const.h"
+#include <cstdlib>;
+#include <ctime>
 
 Ball::Ball(int x, int y)
 {
@@ -8,44 +10,26 @@ Ball::Ball(int x, int y)
 
 	mCollider.r = ballWidth / 2;
 
-	mVelX = 10;
-	mVelY = 5;
-
+	//Init vel
+	mVelX = 0;
+	mVelY = 0; // was 5
+	
+	velMultiplier = 1.0;
 	shiftColliders();
 }
 
-//void Ball::move(SDL_Rect& square, Ball& ball)
-//{
-//	mPosX += mVelX;
-//	shiftColliders();
-//
-//	if ( (mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth) || checkCollision(mCollider, square) )
-//	{
-//		mPosX -= mVelX;
-//		shiftColliders();
-//	}
-//
-//	mPosY += mVelY;
-//	shiftColliders();
-//
-//	//If the dot collided or went too far up or down
-//	if ((mPosY - mCollider.r < 0) || (mPosY + mCollider.r > screenHeight) || checkCollision(mCollider, square))
-//	{
-//		//Move back
-//		mPosY -= mVelY;
-//		shiftColliders();
-//	}
-//
-//}
-
-void Ball::move()
+void Ball::move(Paddle& paddle1, Paddle& paddle2)
 {
-	mPosX += mVelX;
+	start();
+
+	mPosX += mVelX * velMultiplier; 
     shiftColliders();
-	if ( (mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth) )
+	if ( checkCollision(mCollider, paddle1.paddleRect) || checkCollision(mCollider, paddle2.paddleRect))
 	{
 		mVelX = -mVelX;  
 		mPosX += mVelX;
+
+		velMultiplier += 0.1f;
 		shiftColliders();
 	}
 
@@ -58,7 +42,21 @@ void Ball::move()
 		//Move back
 		mVelY = -mVelY;  
 		mPosY += mVelY;
+
+		velMultiplier += 0.1f;
 		shiftColliders();
+	}
+
+	if ((mPosX - mCollider.r < 0) || (mPosX + mCollider.r > screenWidth))
+	{
+		mPosX = screenWidth / 2 - ballWidth / 2;
+		mPosY = screenHeight / 2 - ballHeight / 2;
+		mVelX = 0;
+		mVelY = 0;
+
+		paddle1.setPosY(screenHeight / 2 - paddle1.getHeight() / 2);
+		paddle2.setPosY(screenHeight / 2 - paddle2.getHeight() / 2);
+		isStarted = false;
 	}
 }
 
@@ -67,7 +65,42 @@ void Ball::render()
 	ballTexture.render(mPosX - mCollider.r, mPosY - mCollider.r);
 }
 
-bool Ball ::checkCollision(Circle& a, SDL_Rect& b)
+/// <summary>
+/// Toss coin to decide which side starts
+/// </summary>
+/// <returns></returns>
+bool Ball::start()
+{
+	if (isStarted)
+	{
+		return false;
+	}
+
+	std::srand(std::time(0));
+	int coin = std::rand() % 2 + 1;
+
+	velMultiplier = 1.0f;
+	switch (coin)
+	{
+	//goes to left
+	case 1:
+
+		mVelX = -3;
+		break;
+
+	//goes to right
+	case 2:
+
+		mVelX = 3;
+		break;
+		
+	}
+
+	isStarted = true;
+	return true;
+}
+
+bool Ball ::checkCollision(Circle& a, SDL_FRect& b)
 {
 	int cX, cY;
 

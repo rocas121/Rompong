@@ -14,7 +14,7 @@ bool init()
 	else
 	{
 
-		if (SDL_CreateWindowAndRenderer("Hoshino", screenWidth, screenHeight, SDL_WINDOW_RESIZABLE, &window, &renderer) == false)
+		if (SDL_CreateWindowAndRenderer("Rompong", screenWidth, screenHeight, SDL_WINDOW_RESIZABLE, &window, &renderer) == false)
 		{
 			SDL_Log("Window could not be created,  SDL error : %s\n", SDL_GetError());
 			success = false;
