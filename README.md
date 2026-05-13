@@ -1,5 +1,5 @@
 # Rompong
-My attempt on making a Pong game using SDL3, not a 1:1 reproduction.
+My attempt on making a Pong game using SDL3, I mainly wanted to learn how SDL3 works,gameplay not 1:1 accurate to the actual Pong.
 
 ## Features
 - **Local 2 Players paddles**: Has W/S and UP/DOWN input to control Left and Right paddles respectively
